@@ -7,11 +7,16 @@
     "node": "16.x"
   },
   "dependencies": {
+    "@mapbox/mapbox-gl-geocoder": "^4.7.4",
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "mapbox-gl": "^2.6.1",
+    "mapbox-gl-style-switcher": "^1.0.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-map-gl": "^6.1.18",
+    
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },

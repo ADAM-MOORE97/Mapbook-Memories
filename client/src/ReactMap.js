@@ -30,7 +30,9 @@ const ReactMap = () => {
             });
             const directions = new MapboxGeocoder({
                 accessToken: mapboxgl.accessToken,
-                mapboxgl: mapboxgl
+                mapboxgl: mapboxgl,
+                marker: false
+
             });
 
             map.addControl(directions, 'top-right')
@@ -51,23 +53,23 @@ const ReactMap = () => {
             });
             map.on('contextmenu', (e) => {
                 
-            const marker = new mapboxgl.Marker({ color: 'black', draggable: true})
-                    .setLngLat([e.lngLat.lng.toFixed(0), e.lngLat.lat.toFixed(0)])
+            const marker = new mapboxgl.Marker({ color: 'black', draggable: true, offset: [0, -50/2]})
+                    .setLngLat([e.lngLat.lng.toFixed(6), e.lngLat.lat.toFixed(6)])
                     
                     .addTo(map)
                    
                    marker.on('dragend', (e)=>{
                        let lngLat = e.target.getLngLat();
-                       
-                       let lat = lngLat['lat']
-                       let lng = lngLat['lng']
-                    //    console.log(lat)
-                       setCoords([lng, lat])
-                    //    console.log(`${lngLat['lat']} ${lngLat['lng']}`)
+                       coords.push({lng:lngLat['lat'], lat:lngLat['lng']})
                        console.log(coords)
                    })
-                    
-                   
+                   marker.on('click', (e)=>{
+                       map.removeLayer(e.target);
+                       console.log(e)
+                   })
+                   marker.getElement().addEventListener('click', () => {
+                    marker.remove()
+                  });
                          
                                 
             } );
@@ -75,11 +77,11 @@ const ReactMap = () => {
         };
 
         if (!map) initializeMap({ setMap, mapContainer });
-    }, [map, coords]);
-console.log(coords)
+    }, [map]);
+
 function handleMarker(e){
     e.preventDefault();
-    new mapboxgl.Marker({ color: 'black', draggable: true})
+    new mapboxgl.Marker({ color: 'black', draggable: true,})
                     .setLngLat([coords[0], coords[1]])
                     .addTo(map)
 
@@ -93,7 +95,7 @@ function handleMarker(e){
             </div>
             <form  onSubmit={e =>handleMarker(e)}>
             <label/>
-            <input value={`${coords}`}/>
+            <input value={coords.map(coords => `${coords.lng},${coords.lat}`)}/>
            
          <button>New Marker</button>
             </form>

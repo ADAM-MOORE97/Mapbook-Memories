@@ -16,7 +16,8 @@ const ReactMap = () => {
     const [lng, setLng] = useState(-98.1);
     const [lat, setLat] = useState(39.5);
     const [zoom, setZoom] = useState(3);
-    const [coords, setCoords] = useState([])
+    const [coords, setCoords] = useState({lng, lat})
+    const [markers, setMarkers] = useState([{id:1, lng: lng, lat: lat}])
     
 
     useEffect(() => {
@@ -42,7 +43,7 @@ const ReactMap = () => {
                 map.resize();
             });
             map.on('click', (e) => {
-                // console.log(e.lngLat.lat)
+                setCoords({lng: e.lngLat.lng, lat: e.lngLat.lat})
                 // console.log(e.lngLat.lng)
                 
             })
@@ -55,21 +56,33 @@ const ReactMap = () => {
                 
             const marker = new mapboxgl.Marker({ color: 'black', draggable: true, offset: [0, -50/2]})
                     .setLngLat([e.lngLat.lng.toFixed(6), e.lngLat.lat.toFixed(6)])
-                    
                     .addTo(map)
+                    marker.id = Math.abs(e.lngLat.lng)
+                    // let lngLat = e.target.getLngLat();
+                    //    coords.push({lng:lngLat['lat'], lat:lngLat['lng']})
+                    let markerz = {id: marker.id, lng: marker.getLngLat().lng, lat: marker.getLngLat().lat}
+                    // console.log(markers)
+                    setMarkers(markers.push(markerz))
+                    console.log(markers)
+                   
+                    // console.log(Math.abs(marker.getLngLat().lng))
+                    // console.log(marker.id)
                    
                    marker.on('dragend', (e)=>{
-                       let lngLat = e.target.getLngLat();
-                       coords.push({lng:lngLat['lat'], lat:lngLat['lng']})
-                       console.log(coords)
+                    let lngLat = e.target.getLngLat();
+                    setCoords({lng:lngLat['lat'], lat:lngLat['lng']})
+                    console.log(coords)
+                    //    let lngLat = e.target.getLngLat();
+                    //    coords.push({lng:lngLat['lat'], lat:lngLat['lng']})
+                    // let index = markers.findIndex(marker=> marker.id === e.target.id)
+                    // markers[index].lng = lngLat['lng']
+                    // markers[index].lat = lngLat['lat']
+                    // console.log(markers)
+                    // setMarkers(markers)
+
+                    
                    })
-                   marker.on('click', (e)=>{
-                       map.removeLayer(e.target);
-                       console.log(e)
-                   })
-                   marker.getElement().addEventListener('click', () => {
-                    marker.remove()
-                  });
+              
                          
                                 
             } );
@@ -81,9 +94,13 @@ const ReactMap = () => {
 
 function handleMarker(e){
     e.preventDefault();
-    new mapboxgl.Marker({ color: 'black', draggable: true,})
-                    .setLngLat([coords[0], coords[1]])
+   let marker =  new mapboxgl.Marker({ color: 'black', draggable: true,})
+                    .setLngLat([coords.lng, coords.lat])
                     .addTo(map)
+                    marker.id = Math.abs(marker.getLngLat().lng)
+                    let markerObj = {id: marker.id, lng: marker.getLngLat().lng, lat: marker.getLngLat().lat}
+    setMarkers(markerObj)
+    console.log(markers)
 
 }
 
@@ -95,7 +112,8 @@ function handleMarker(e){
             </div>
             <form  onSubmit={e =>handleMarker(e)}>
             <label/>
-            <input value={coords.map(coords => `${coords.lng},${coords.lat}`)}/>
+            <input name="lng" value={coords.lng} placeholder="Longitude"/>
+            <input value={coords.lat} placeholder="Latitude"/>
            
          <button>New Marker</button>
             </form>

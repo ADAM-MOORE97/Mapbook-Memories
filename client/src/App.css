@@ -2,3 +2,20 @@
   min-width: none;
   width: 1em
 }
+
+.logo{
+  /* background-image: url("https://i.imgur.com/rsLrCNh.png"); */
+
+height: 40em;
+
+display: flex;
+margin-left: auto;
+margin-right: auto;
+
+ 
+}
+.landingpage {
+height: 100vh;
+width: 100vw;
+background: black
+}

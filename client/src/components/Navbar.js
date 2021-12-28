@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import { UserContext } from '../context/user';
 import {GoogleLogout } from 'react-google-login';
+import { Link } from 'react-router-dom';
 
 
 export default function Navbar() {
@@ -19,6 +20,7 @@ export default function Navbar() {
                 onLogoutSuccess={logout}
             >
             </GoogleLogout>
+            <Link to='/new_place'>New Place</Link>
         </div>
     )
 }

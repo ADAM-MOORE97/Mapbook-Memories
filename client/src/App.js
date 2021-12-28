@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import ReactMap from './components/ReactMap';
 import LandingPage from './components/LandingPage';
 import './App.css'
+import NewPlace from './components/NewPlace';
 
  
 
@@ -30,7 +31,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path='/' element={<ReactMap/>}></Route>
-
+        <Route path='/new_place' element={<NewPlace/>}></Route>
       </Routes>
       
     </div>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :places
   resources :users
   get '/me', to: 'users#show'
   post '/auth_users', to: 'users#create'

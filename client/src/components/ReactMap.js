@@ -16,9 +16,14 @@ const ReactMap = () => {
     const [lng, setLng] = useState(-98.100000);
     const [lat, setLat] = useState(39.500000);
     const [zoom, setZoom] = useState(3.000);
-    const [coords, setCoords] = useState()
+    const [coords, setCoords] = useState({lng: '', lat: ''})
     const [markers, setMarkers] = useState([{ id: 1, lng: lng, lat: lat }])
-
+useEffect(()=>{
+    fetch('/places').then(r=>r.json()).then(data=>console.log(data))
+}, [])
+useEffect(()=>{
+    fetch('/trips').then(r=>r.json()).then(data=>console.log(data))
+}, [])
 
     useEffect(() => {
         mapboxgl.accessToken = 'pk.eyJ1IjoiYWRhbW1vb3JlMjEiLCJhIjoiY2t4NTY4MmxkMjE3MTJ1bXI0c2hkcWF4MCJ9.4mGlkslBlwc6tAmqbmUuoA';;
@@ -43,7 +48,7 @@ const ReactMap = () => {
                 map.resize();
             });
             map.on('click', (e) => {
-                setCoords({ lng: e.lngLat.lng, lat: e.lngLat.lat })
+                setCoords({ lng: e.lngLat.lng.toFixed(6), lat: e.lngLat.lat.toFixed(6) })
 
 
             })
@@ -88,7 +93,11 @@ const ReactMap = () => {
         console.log(markers)
 
     }
+function Change(e){
+ 
+setCoords({[e.target.name]:e.target.value})
 
+}
     return (
         <div>
             <div ref={el => (mapContainer.current = el)} style={styles} />
@@ -98,9 +107,9 @@ const ReactMap = () => {
             <h2>New Place</h2>
             <form>
                 <input name='placeName' placeholder="Location Name"/>
-                <input name="lng" value={coords? coords.lng : ''} placeholder="Click Map for Longitude" />
+                <input name="lng" defaultValue={coords.lng} placeholder="Click Map for Longitude" />
                 <input type='file'/>
-                <input name='lat' value={coords? coords.lat: ''} placeholder="Click Map for Latitude" />
+                <input name='lat' defaultValue={coords.lat} placeholder="Click Map for Latitude" />
                 <textarea name='description' placeholder="Description"/>
                 <button>add place</button>
             </form>

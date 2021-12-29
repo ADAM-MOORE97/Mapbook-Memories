@@ -1,12 +1,11 @@
-class PlacesController < ApplicationController
+class TripsController < ApplicationController
     def index
         if @current_user
             # byebug
-        places = @current_user.places.all
-        render json: places
+        trips = @current_user.trips.all
+        render json: trips
         else 
             render json:[error: 'Not Found, No Current User'], status: 404
         end
     end
-  
 end

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :trips
   resources :places
   resources :users
   get '/me', to: 'users#show'

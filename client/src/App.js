@@ -5,8 +5,10 @@ import Navbar from './components/Navbar';
 import ReactMap from './components/ReactMap';
 import LandingPage from './components/LandingPage';
 import './App.css'
-import NewPlace from './components/NewPlace';
+import PlaceForm from './components/PlaceForm';
 import Dashboard from './components/Dashboard';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import PlaceCollection from './components/PlaceCollection';
 
 function App() {
   const { user, setUser } = useContext(UserContext)
@@ -20,7 +22,7 @@ console.log(user)
   }, [])
 
 
-  console.log(user)
+
   if (!user)
     return (<LandingPage setUser={setUser} />)
   else
@@ -29,7 +31,8 @@ console.log(user)
         <Navbar setUser={setUser} />
         <Routes>
           <Route path='/' element={<Dashboard/>}></Route>
-          <Route path='/new_place' element={<NewPlace />}></Route>
+          <Route path='/places/new' element={<PlaceForm />}></Route>
+          <Route path='/places/collection' element={<PlaceCollection/>}></Route>
         </Routes>
 
       </div>

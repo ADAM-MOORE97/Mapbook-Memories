@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../context/user';
 
 export default function Dashboard() {
@@ -34,11 +35,21 @@ export default function Dashboard() {
             <div>
                 <h6>Places Visited:{visitedCount} </h6>
                 <h6>Dream Places:{dreamedCount} </h6>
-                <h6></h6>
+                <Link to="/places/collection">
+                <button>See All</button>
+                </Link>
+                <Link to="/places/new">
+                <button>Add</button> 
+                </Link> {/* params*/}
+                
+                
             </div>
             <div>
                 <h6>Trips Taken:{takenCount} </h6>
                 <h6>Trips Planned:{plannedCount} </h6>
+                <button>Gallery</button>
+                <button>See All</button>
+                <button>Add</button>
             </div>
 
 

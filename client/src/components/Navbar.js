@@ -20,7 +20,10 @@ export default function Navbar({setUser}) {
                 onLogoutSuccess={logout}
             >
             </GoogleLogout>
-            <Link to='/new_place'>New Place</Link>
+            
+            <Link to='/'>Dashboard</Link>
+            <Link to='/places/new'>New Place</Link>
+            <Link to='/places/collection'>Place Collection</Link>
         </div>
     )
 }

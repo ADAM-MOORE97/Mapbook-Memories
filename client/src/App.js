@@ -9,17 +9,18 @@ import PlaceForm from './components/PlaceForm';
 import Dashboard from './components/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PlaceCollection from './components/PlaceCollection';
+import PlaceDetails from './components/PlaceDetails';
 
 function App() {
   const { user, setUser } = useContext(UserContext)
-console.log(user)
+
   useEffect(() => {
     fetch('/me')
       .then(resp => {
         if (resp.ok) resp.json().then(data => setUser(data))
         else resp.json().then(errors => console.log(errors))
       })
-  }, [])
+  },[])
 
 
 
@@ -33,6 +34,9 @@ console.log(user)
           <Route path='/' element={<Dashboard/>}></Route>
           <Route path='/places/new' element={<PlaceForm />}></Route>
           <Route path='/places/collection' element={<PlaceCollection/>}></Route>
+          <Route path='/places/:id' element={<PlaceDetails/>}></Route>
+          <Route path='/places/:id/edit' element={<PlaceForm/>}></Route>
+          
         </Routes>
 
       </div>

@@ -18,7 +18,7 @@ class PlacesController < ApplicationController
     end
     def show
         if @current_user
-            place = @current_user.places.find(params[:id])
+            place = Place.find(params[:id])
             render json: place, status: :ok
         else
             render json: {errors: ["You are not logged in"]}, status: :unauthorized
@@ -26,8 +26,9 @@ class PlacesController < ApplicationController
     end
     def update
         if @current_user
-            place = @current_user.places.find(params[:id])
+            place = @current_user.places.find_by(id: params[:id])
             place.update!(place_params)
+            # byebug
             render json: place, status: :ok
         else
             render json: {errors: ["You are not logged in"]}, status: :unauthorized
@@ -35,6 +36,6 @@ class PlacesController < ApplicationController
     end
     private
   def place_params
-      params.permit(:name, :longitude, :latitude, :description, :visited)
+      params.permit(:name, :longitude, :latitude, :description, :visited, :id)
   end
 end

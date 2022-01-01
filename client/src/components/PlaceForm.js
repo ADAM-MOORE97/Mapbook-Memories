@@ -23,18 +23,33 @@ export default function PlaceForm() {
     const [longitude, setLongitude] = useState('')
     const [latitude, setLatitude] = useState('')
     const [hasBeen, setHasBeen] = useState(false)
+    const[visited, setVisited] = useState()
     const [placeData, setPlaceData] = useState({
         name: '',
         longitude: '',
         latitude: '',
         description: '',
-        visited: hasBeen
+        visited: false
 
     })
+    
+    useEffect(() => {
+        if (params.id)
+            fetch(`/places/${params.id}`)
+                .then(r => r.json())
+                .then(data => {
+                    setPlaceData(data)
+                    
+                    if(data.visited === true){
+                        setVisited(data.visited)
+                    }
+                    console.log(data)
+                })
+    }, [])
     const handleSubmit = async (e) => {
         e.preventDefault();
       
-      
+      console.log(placeData)
         
         const response = await fetch(params.id ? `/places/${params.id}` : '/places', {
             method: params.id ? 'PATCH' : 'POST',
@@ -46,29 +61,25 @@ export default function PlaceForm() {
         const data = await response.json();
 
         if (response.ok) {
-            navigate(`/places/${data.id}`)
+            
             console.log(data)
+            
         } else {
             alert(data.errors.join("\n \n"))
         }
     }
     const handleChange = (e) => {
 
-        setHasBeen(hasBeen => !hasBeen)
+     console.log(hasBeen)
         setPlaceData({ ...placeData, [e.target.name]: e.target.value})
 
+
     }
+    const handleChangeVisited = (e) =>{
+console.log(e.target.name, e.target.checked)
+setPlaceData({...placeData, [e.target.name]: e.target.checked})
 
-
-
-
-
-
-
-
-  
-
-
+    }
     useEffect(() => {
         mapboxgl.accessToken = 'pk.eyJ1IjoiYWRhbW1vb3JlMjEiLCJhIjoiY2t4NTY4MmxkMjE3MTJ1bXI0c2hkcWF4MCJ9.4mGlkslBlwc6tAmqbmUuoA';;
         const initializeMap = ({ setMap, mapContainer }) => {
@@ -137,7 +148,7 @@ export default function PlaceForm() {
                     <input className='form-control border-dark' type='text' name='longitude' value={placeData.longitude} onChange={handleChange} placeholder='Paste click result here' required></input>
                     <br />
                     <label className='form-label'>Visited: </label>
-                    <input type='checkbox' name='visited' value={hasBeen} onChange={handleChange} ></input>
+                   <input  type='checkbox'name='visited' checked={params.id? placeData.visited: ""}  onChange={handleChangeVisited}></input>
                     <br />
                     <label className='form-label'>description:</label>
                     <textarea id='placeDescription' className='form-control border-dark' name='description' value={placeData.description} onChange={handleChange}></textarea>

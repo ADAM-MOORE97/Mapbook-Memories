@@ -34,6 +34,13 @@ class PlacesController < ApplicationController
             render json: {errors: ["You are not logged in"]}, status: :unauthorized
         end
     end
+    def destroy
+      if @current_user
+        place = @current_user.places.find(params[:id])
+        place.destroy
+        head :no_content
+      end
+    end
     private
   def place_params
       params.permit(:name, :longitude, :latitude, :description, :visited, :id)

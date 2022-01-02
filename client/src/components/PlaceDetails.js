@@ -74,6 +74,21 @@ const handleMarker = ()=>{
 function handleEditClick(placeDetails) {
     navigate(`/places/${placeDetails.id}/edit`)
   }
+ function handleDeleteClick() {
+      const del = window.confirm("Delete Place?");
+
+    if(del === true){
+        fetch(`/places/${params.id}`, {
+      method: "DELETE",
+    })
+    .then(r=>r.json())
+    .then(data=> console.log(data))
+    .catch(data =>console.log(data.errors))
+    navigate('/places/collection')
+    
+    }
+    else{console.log("Delete canceled")}}
+;
 
     return (
         <div>
@@ -84,7 +99,8 @@ function handleEditClick(placeDetails) {
             <p>{placeDetails.description}</p>
             <button onClick={handleMarker}>Show Location Marker</button>
             <button onClick={(e)=>handleEditClick(placeDetails)}>Edit Place</button>
-            </div> : null}
+            <button onClick={(e)=>handleDeleteClick(placeDetails)}>Delete Place</button>
+            </div> : <h3>No Places to show</h3>}
           
 
         </div>

@@ -48,7 +48,9 @@ export default function Dashboard() {
                 <h6>Trips Taken:{takenCount} </h6>
                 <h6>Trips Planned:{plannedCount} </h6>
                 <button>Gallery</button>
+                <Link to="/trips/collection">
                 <button>See All</button>
+                </Link>
                 <button>Add</button>
             </div>
 

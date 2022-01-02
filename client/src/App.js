@@ -10,6 +10,8 @@ import Dashboard from './components/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PlaceCollection from './components/PlaceCollection';
 import PlaceDetails from './components/PlaceDetails';
+import TripCollection from './components/TripCollection';
+import TripDetails from './components/TripDetails';
 
 function App() {
   const { user, setUser } = useContext(UserContext)
@@ -36,7 +38,8 @@ function App() {
           <Route path='/places/collection' element={<PlaceCollection/>}></Route>
           <Route path='/places/:id' element={<PlaceDetails/>}></Route>
           <Route path='/places/:id/edit' element={<PlaceForm/>}></Route>
-          
+          <Route path='/trips/collection' element={<TripCollection/>}></Route>
+          <Route path='/trips/:id' element={<TripDetails/>}></Route>
         </Routes>
 
       </div>

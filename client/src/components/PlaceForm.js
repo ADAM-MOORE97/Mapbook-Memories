@@ -148,7 +148,7 @@ setPlaceData({...placeData, [e.target.name]: e.target.checked})
                     <input className='form-control border-dark' type='text' name='longitude' value={placeData.longitude} onChange={handleChange} placeholder='Paste click result here' required></input>
                     <br />
                     <label className='form-label'>Visited: </label>
-                   <input  type='checkbox'name='visited' checked={params.id? placeData.visited: ""}  onChange={handleChangeVisited}></input>
+                   {placeData.visited? <p>YES</p>:<input  type='checkbox'name='visited'   onChange={handleChangeVisited}></input>}
                     <br />
                     <label className='form-label'>description:</label>
                     <textarea id='placeDescription' className='form-control border-dark' name='description' value={placeData.description} onChange={handleChange}></textarea>

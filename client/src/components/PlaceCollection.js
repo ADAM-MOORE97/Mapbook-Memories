@@ -91,8 +91,9 @@ export default function PlaceCollection() {
 
 
 
-
-
+if(filteredPlaces === []){
+  console.log('yay')
+}
 
 
   return (

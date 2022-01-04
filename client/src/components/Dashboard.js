@@ -7,6 +7,7 @@ export default function Dashboard() {
     const [places, setPlaces] = useState([])
     const [trips, setTrips] = useState([])
 
+
     // useEffect(() => {
     //     fetch('/places')
     //         .then(r => r.json())
@@ -19,7 +20,8 @@ export default function Dashboard() {
     useEffect(()=>{
         fetch('/trips')
         .then(r => r.json())
-        .then(data => console.log(data));
+        .then(data => {console.log(data);
+        });
 
     }, [])
     let visitedCount = places? places.filter(place => place.visited === true).length : null
@@ -32,6 +34,7 @@ export default function Dashboard() {
 
     return (
         <div>
+           
             <div>
                 <h6>Places Visited:{visitedCount} </h6>
                 <h6>Dream Places:{dreamedCount} </h6>

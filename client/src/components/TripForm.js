@@ -5,7 +5,7 @@ export default function TripForm({user}) {
   )
   const [attachment, setAttachment] = useState({attachments:[]})
     // const [showImgForm, setShowImgForm] = useState(false)
-    // const [image, setImage] = useState()
+    const [image, setImage] = useState()
 
  const submitForm = (e)=>{
 e.preventDefault();
@@ -25,7 +25,8 @@ for(let i=0; i< form.attachments.files.length; i++ ){
       method: 'POST',
       body: formData
   }).then(r=>r.json())
-  .then(data=>console.log(data))
+  .then(data=>{setImage(data);
+console.log(data)})
  }
 
  const onImageUpload = (e) => {
@@ -36,6 +37,7 @@ setAttachment({
 
     return (
         <div>
+         {image? image.attachment_urls.map((pic)=><img src={pic}/>) : null}
             <form onSubmit={submitForm}>
                 <input  name='name' onChange={(e)=>setName(e.target.value)}></input>
                 {/* <input value={tripData.start_date} name='start_date' onChange={handleChange}></input>

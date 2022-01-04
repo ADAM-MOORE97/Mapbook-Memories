@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom'
 import { UserContext } from './context/user';
 import Navbar from './components/Navbar';
@@ -16,16 +16,22 @@ import TripForm from './components/TripForm';
 
 function App() {
   const { user, setUser } = useContext(UserContext)
+  const [places, setPlaces] = useState([])
+  const [trips, setTrips] = useState([])
 
   useEffect(() => {
     fetch('/me')
       .then(resp => {
         if (resp.ok) resp.json().then(data => setUser(data))
         else resp.json().then(errors => console.log(errors))
+        console.log(user)
       })
   },[])
+ 
 
-console.log(user)
+
+
+
 
   if (!user)
     return (<LandingPage setUser={setUser} />)
@@ -33,15 +39,15 @@ console.log(user)
     return (
       <div>
         <Navbar setUser={setUser} />
-        <TripForm user={user}/>
         <Routes>
-          <Route path='/' element={<Dashboard/>}></Route>
+          <Route path='/' element={<Dashboard setPlaces={setPlaces} setTrips={setTrips} />}></Route>
           <Route path='/places/new' element={<PlaceForm />}></Route>
           <Route path='/places/collection' element={<PlaceCollection/>}></Route>
           <Route path='/places/:id' element={<PlaceDetails/>}></Route>
           <Route path='/places/:id/edit' element={<PlaceForm/>}></Route>
           <Route path='/trips/collection' element={<TripCollection/>}></Route>
           <Route path='/trips/:id' element={<TripDetails/>}></Route>
+          <Route path='/trips/new' element={<TripForm user={user}/>}></Route>
         </Routes>
 
       </div>

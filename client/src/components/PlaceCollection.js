@@ -70,7 +70,9 @@ export default function PlaceCollection() {
         setFilteredPlaces(data)
 
       })
+    
     placeData.map(place => {
+      console.log(place.visited)
       if (place.visited) {
         new mapboxgl.Marker({ color: 'black', offset: [0, -50 / 2] })
           .setLngLat([place.longitude, place.latitude])
@@ -86,6 +88,7 @@ export default function PlaceCollection() {
 
     if (!map) initializeMap({ setMap, mapContainer });
   }, [map]);
+
 
 
 

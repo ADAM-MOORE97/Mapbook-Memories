@@ -10,7 +10,7 @@ class TripsController < ApplicationController
     def show
         if @current_user
             trip = Trip.find(params[:id])
-            render json: trip, status: :ok
+            render json: TripSerializer.new(trip).serializable_hash[:data][:attributes], status: 200
         else
             render json: {errors: ["You are not logged in"]}, status: :unauthorized
         end

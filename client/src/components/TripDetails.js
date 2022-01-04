@@ -18,17 +18,16 @@ export default function TripDetails() {
 
 
     useEffect(()=>{
-        if(params.id){fetch(`/trips/${params.id}`)
+        fetch(`/trips/${params.id}`)
         .then((resp)=>{
             if(resp.ok){
                 resp.json().then((data)=> setTripDetails(data))
-                
-               
+
             } else{
-                resp.json().then(data=>console.log(data.errors[0]))
+                resp.json().then(data=>console.log(data))
             }
-        })}
-        console.log(tripDetails)
+        })
+        
     
     }, []);
     

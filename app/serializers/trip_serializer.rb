@@ -1,4 +1,6 @@
-class TripSerializer < ActiveModel::Serializer
-  attributes :id, :name, :start_date, :end_date, :description, :taken, :images
-  belongs_to :place, serializer: AddPlaceSerializer
+class TripSerializer
+  include JSONAPI::Serializer
+  attributes :id, :name, :start_date, :end_date, :description, :taken, :place_id, :attachment_urls
+
+
 end

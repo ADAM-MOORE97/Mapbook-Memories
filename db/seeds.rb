@@ -10,6 +10,7 @@ Trip.destroy_all
 Trip.reset_pk_sequence
 Place.destroy_all
 Place.reset_pk_sequence
+
 adam= User.find_by(id: 1)
 
 thorpe = Place.create(name: 'Jim Thorpe', longitude:-75.739667, latitude: 40.872292, description: "Mountain Biking trail", user_id:adam.id)

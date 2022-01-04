@@ -20,7 +20,7 @@ gem 'dotenv-rails'
 
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -54,3 +54,4 @@ end
 gem "active_model_serializers", "~> 0.10.12"
 gem 'pry'
 gem 'activerecord-reset-pk-sequence'
+gem "jsonapi-serializer", "~> 2.2"

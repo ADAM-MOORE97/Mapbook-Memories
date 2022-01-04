@@ -7,25 +7,25 @@ export default function Dashboard() {
     const [places, setPlaces] = useState([])
     const [trips, setTrips] = useState([])
 
-    useEffect(() => {
-        fetch('/places')
-            .then(r => r.json())
-            .then(data => setPlaces(data));
+    // useEffect(() => {
+    //     fetch('/places')
+    //         .then(r => r.json())
+    //         .then(data => setPlaces(data));
      
     
         
-    }, [])
+    // }, [])
 
     useEffect(()=>{
         fetch('/trips')
         .then(r => r.json())
-        .then(data => setTrips(data));
+        .then(data => console.log(data));
 
     }, [])
-    let visitedCount = places.filter(place => place.visited === true).length
-    let dreamedCount = places.filter(place => place.visited === false).length
-    let takenCount = trips.filter(trip => trip.taken === true).length
-    let plannedCount = trips.filter(trip => trip.taken === false).length
+    let visitedCount = places? places.filter(place => place.visited === true).length : null
+    let dreamedCount = places? places.filter(place => place.visited === false).length : null
+    let takenCount = trips? trips.filter(trip => trip.taken === true).length : null
+    let plannedCount = trips? trips.filter(trip => trip.taken === false).length : null
 
 
 

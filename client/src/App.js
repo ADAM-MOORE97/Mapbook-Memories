@@ -12,6 +12,7 @@ import PlaceCollection from './components/PlaceCollection';
 import PlaceDetails from './components/PlaceDetails';
 import TripCollection from './components/TripCollection';
 import TripDetails from './components/TripDetails';
+import TripForm from './components/TripForm';
 
 function App() {
   const { user, setUser } = useContext(UserContext)
@@ -24,7 +25,7 @@ function App() {
       })
   },[])
 
-
+console.log(user)
 
   if (!user)
     return (<LandingPage setUser={setUser} />)
@@ -32,6 +33,7 @@ function App() {
     return (
       <div>
         <Navbar setUser={setUser} />
+        <TripForm user={user}/>
         <Routes>
           <Route path='/' element={<Dashboard/>}></Route>
           <Route path='/places/new' element={<PlaceForm />}></Route>

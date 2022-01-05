@@ -7,7 +7,9 @@ import LandingPage from './components/LandingPage';
 import './App.css'
 import PlaceForm from './components/PlaceForm';
 import Dashboard from './components/Dashboard';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+
 import PlaceCollection from './components/PlaceCollection';
 import PlaceDetails from './components/PlaceDetails';
 import TripCollection from './components/TripCollection';

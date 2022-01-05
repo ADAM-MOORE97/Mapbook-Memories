@@ -38,10 +38,19 @@ class TripsController < ApplicationController
     end
     def update
         if @current_user
-            trip = @current_user.trips.find_by(id: params[:id])
+            trip = Trip.find_by(id: params[:id])
+            if trip.taken == true
+            Place.find(params[:place_id]).update(visited: true)
+            
             trip.update!(trip_params)
-            # byebug
+            trip.to_json(include: [:attachments])
             render json: TripSerializer.new(trip).serializable_hash[:data][:attributes], status: 200
+            else
+                trip = Trip.find_by(id: params[:id])
+                trip.update!(trip_params)
+                trip.to_json(include: [:attachments])
+                render json: TripSerializer.new(trip).serializable_hash[:data][:attributes], status: 200
+            end
         else
             render json: {errors: ["You are not logged in"]}, status: :unauthorized
         end
@@ -60,7 +69,7 @@ class TripsController < ApplicationController
     private
 
     def trip_params
-        params.permit(:name, :user_id, :place_id, :start_date, :end_date, :description, :taken, attachments: [])
+        params.permit(:id, :name, :user_id, :place_id, :start_date, :end_date, :description, :taken, attachments: [])
     end
 
 end

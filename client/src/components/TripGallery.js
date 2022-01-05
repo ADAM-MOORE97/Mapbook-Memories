@@ -17,7 +17,7 @@ export default function TripGallery() {
     },[])
     return (
         <div>
-            <button onClick={()=>setCarousel(!carousel)}>Toggle Display</button>
+            
             {filterTrip.map((tripInfo)=>{
                 let info = tripInfo
                 let images = tripInfo.attachment_urls

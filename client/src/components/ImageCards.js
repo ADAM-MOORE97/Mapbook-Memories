@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import '../App.css'
 
-export default function ImageCards({ images, info, carousel }) {
-    console.log(images)
+
+export default function ImageCards({ images, info, }) {
+
 
     const [place, setPlace] = useState({})
     const [index, setIndex] = useState(0); // create state to keep track of images index, set the default index to 0
@@ -25,33 +27,22 @@ export default function ImageCards({ images, info, carousel }) {
             .then(data => setPlace(data))
     }, [])
     return (
-        images.length > 0 && (
-            <div>
-                {carousel ?
-                    <div>    <div>
+     
+               <div>
                         <h2>Trip: {info.name}</h2>
-                        <h4>Place: {place.name}</h4>
                         <h5>Start: {info.start_date}, End: {info.end_date} </h5>
 
-                    </div>
-                        <div id='ImageSlideContainer'>
-                            <img src={images[index]} alt={index} width={250} />
-                            <div>
-                                <button onClick={slideLeft}>{"<"}</button>
-                                <button onClick={slideRight}>{">"}</button>
-                            </div>
-                        </div></div> : <div>
-                        <h2>Trip: {info.name}</h2>
-                                <h4>Place: {place.name}</h4>
-                                <h5>Start: {info.start_date}, End: {info.end_date} </h5>
-                        {images.map(image => <img src={image} alt={index} width={250} />)}</div>
-                }
+                
+                {images.map(image=><div className='polaroid'><a href='#' title={place.name}><img  src={image} alt={index} width={250} /></a></div>)}
+                           
+                       
+                
 
 
 
 
 
             </div>
-        )
+        
     )
 }

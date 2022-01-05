@@ -13,6 +13,7 @@ import PlaceDetails from './components/PlaceDetails';
 import TripCollection from './components/TripCollection';
 import TripDetails from './components/TripDetails';
 import TripForm from './components/TripForm';
+import TripGallery from './components/TripGallery';
 
 function App() {
   const { user, setUser } = useContext(UserContext)
@@ -48,6 +49,8 @@ function App() {
           <Route path='/trips/collection' element={<TripCollection/>}></Route>
           <Route path='/trips/:id' element={<TripDetails/>}></Route>
           <Route path='/trips/new' element={<TripForm user={user}/>}></Route>
+          <Route path='/trips/:id/edit' element={<TripForm user={user}/>}></Route>
+          <Route path='/trips/gallery' element={<TripGallery/>}></Route>
         </Routes>
 
       </div>

@@ -12,7 +12,7 @@ class ApplicationController < ActionController::API
   def current_user
     # byebug
     @current_user = User.find_by(id: session[:user_id])
-    # request.cookies['help'] = 'yes'
+    
 
   end
 

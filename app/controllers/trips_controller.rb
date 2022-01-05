@@ -16,7 +16,18 @@ class TripsController < ApplicationController
         end
     end
     def create
+        # byebug
         trip = Trip.new(trip_params)
+     
+        if trip.taken == true
+            Place.find(params[:place_id]).update(visited: true)
+            trip.to_json(include: [:attachments])
+                if trip.save
+                    render json: TripSerializer.new(trip).serializable_hash[:data][:attributes], status: 200
+                 else
+                     render json: trip.errors, status: :unprocessable_entity
+                 end
+        else
         trip.to_json(include: [:attachments])
         if trip.save
             render json: TripSerializer.new(trip).serializable_hash[:data][:attributes], status: 200
@@ -24,20 +35,22 @@ class TripsController < ApplicationController
             render json: trip.errors, status: :unprocessable_entity
         end
     end
+    end
     def update
         if @current_user
             trip = @current_user.trips.find_by(id: params[:id])
             trip.update!(trip_params)
             # byebug
-            render json: trip, serializer: AddPlaceSerializer, status: :ok
+            render json: TripSerializer.new(trip).serializable_hash[:data][:attributes], status: 200
         else
             render json: {errors: ["You are not logged in"]}, status: :unauthorized
         end
     end
     def destroy
-        place = Place.find(params[:id])
-        if @current_user.id == place.user_id
-             place.destroy
+        trip = @current_user.trips.find_by(id: params[:id])
+        if @current_user.id == trip.user_id
+             trip.attachments.purge
+             trip.destroy
             render json: {message: "deleted"}
         else
             render json: {errors: ["You are not logged in"]}, status: :unauthorized
@@ -47,7 +60,7 @@ class TripsController < ApplicationController
     private
 
     def trip_params
-        params.permit(:name, :user_id, :place_id, attachments: [])
+        params.permit(:name, :user_id, :place_id, :start_date, :end_date, :description, :taken, attachments: [])
     end
 
 end

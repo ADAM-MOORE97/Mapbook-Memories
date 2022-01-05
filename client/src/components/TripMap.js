@@ -11,8 +11,8 @@ const showstyles = {
 
 }
 
-export default function TripMap({tripDetails}) {
-    console.log(tripDetails.place)
+export default function TripMap({place}) {
+    
     const [map, setMap] = useState(null);
     const mapContainer = useRef(null);
    
@@ -41,10 +41,19 @@ export default function TripMap({tripDetails}) {
                  setMap(map);
                  map.resize();
              });
-             {tripDetails.place.visited? new mapboxgl.Marker({ color: 'black',anchor: 'bottom' })
-         .setLngLat([tripDetails.place.longitude, tripDetails.place.latitude])
+             
+            let popup = new mapboxgl.Popup({ offset: 45 })
+            if(place){
+                popup.setHTML(
+                    `<h6> Location: ${place.name}</h6>`
+                )
+            }
+             {place.visited? new mapboxgl.Marker({ color: 'green',anchor: 'bottom' })
+         .setLngLat([place.longitude, place.latitude])
+         .setPopup(popup)
          .addTo(map) : new mapboxgl.Marker({ color: 'red',anchor: 'bottom' })
-         .setLngLat([tripDetails.place.longitude, tripDetails.place.latitude])
+         .setLngLat([place.longitude, place.latitude])
+         .setPopup(popup)
          .addTo(map)}
  
          };

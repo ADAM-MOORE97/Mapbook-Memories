@@ -72,15 +72,20 @@ export default function PlaceCollection() {
       })
     
     placeData.map(place => {
+      const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+        `<h6>${place.name}</h6>`
+        );
       console.log(place.visited)
       if (place.visited) {
-        new mapboxgl.Marker({ color: 'black', offset: [0, -50 / 2] })
+        new mapboxgl.Marker({ color: 'green', offset: [0, -50 / 2] })
           .setLngLat([place.longitude, place.latitude])
+          .setPopup(popup)
           .addTo(map)
       }
       else if (!place.visted) {
         new mapboxgl.Marker({ color: 'red', offset: [0, -50 / 2] })
           .setLngLat([place.longitude, place.latitude])
+          .setPopup(popup)
           .addTo(map)
 
       }

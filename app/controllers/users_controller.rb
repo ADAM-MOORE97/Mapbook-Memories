@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     user.imageUrl = params[:imageUrl]
         end
 # byebug
-    # session[:user_id] = user.id
+    session[:user_id] = user.id
     render json: user, status: :created
     end
     def destroy

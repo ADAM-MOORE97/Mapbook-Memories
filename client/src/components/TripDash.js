@@ -8,7 +8,9 @@ export default function TripDash({tripData}) {
         <div>
             <h6>Trips Taken:{takenCount} </h6>
             <h6>Trips Planned:{plannedCount} </h6>
+            <Link to="/trips/gallery">
             <button>Gallery</button>
+            </Link>
             <Link to="/trips/collection">
                 <button>See All</button>
             </Link>

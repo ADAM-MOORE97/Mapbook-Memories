@@ -27,13 +27,17 @@ export default function ImageCards({ images, info, }) {
             .then(data => setPlace(data))
     }, [])
     return (
-     
-               <div>
-                        <h2>Trip: {info.name}</h2>
+     <div>
+         <div className='card'>
+                       <div className='card-header'>
+                       <h2>TRIP: {info.name}</h2>
                         <h5>Start: {info.start_date}, End: {info.end_date} </h5>
+                       </div>
+                </div>
+                <div className='m-3'>
 
                 
-                {images.map(image=><div className='polaroid'><a href='#' title={place.name}><img  src={image} alt={index} width={250} /></a></div>)}
+                {images.map(image=><div className='polaroid'><a title={place.name}><img  src={image} alt={index} width={250} /></a></div>)}
                            
                        
                 
@@ -43,6 +47,9 @@ export default function ImageCards({ images, info, }) {
 
 
             </div>
+
+     </div>
+               
         
     )
 }

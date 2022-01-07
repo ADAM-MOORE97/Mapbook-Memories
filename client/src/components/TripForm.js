@@ -13,7 +13,7 @@ export default function TripForm({ user }) {
     const [taken, setTaken] = useState('')
     const [attachment, setAttachment] = useState({ attachments: [] })
     const [places, setPlaces] = useState([])
-console.log(params.id)
+
 
     useEffect(() => {
         if (params.id) {
@@ -68,7 +68,7 @@ console.log(params.id)
         formData.append("start_date", start_date)
         formData.append("end_date", end_date)
         formData.append("taken", taken)
-        for (let i = 0; i < form.attachments.files.length; i++) {
+      if(taken) for (let i = 0; i < form.attachments.files.length; i++) {
             formData.append('attachments[]', form.attachments.files[i])
         }
        
@@ -93,20 +93,20 @@ console.log(params.id)
         setPlaceId(e.target.value)
     }
 
-    console.log(attachment)
+
     if (params.id) {
         return (
             <div className='container-fluid mt-5'>
                 <div className='row'>
-                    <form className='col-6' onSubmit={submitForm}>
+                    <form className='col-8' onSubmit={submitForm}>
                         <label className='form-label'>Place:</label>
-                        <select name='place' className='form-control border-dark' onChange={handlePlaceChange}>
+                        <select name='place' className='form-control border-dark' onChange={handlePlaceChange} required>
                             <option value="Select a Place"> -- Select a Place -- </option>
                             <option value={places.id}>{places.name}</option>
                         </select>
-                        <label className='form-label'>Name:</label>
-                        <input className='form-control border-dark' name='name' value={name} onChange={(e) => setName(e.target.value)} placeholder='Trip Name'></input>
-                        <label className='form-label'>Start Date:</label>
+                        <label  className='form-label'>Name:</label>
+                        <input  className='form-control border-dark' name='name' value={name} onChange={(e) => setName(e.target.value)} placeholder='Trip Name' required></input>
+                        <label  className='form-label'>Start Date:</label>
                         <input className='form-control border-dark' type='date' value={start_date} name='start_date' onChange={(e) => setStart_Date(e.target.value)}></input>
                         <label className='form-label'>End Date:</label>
                         <input className='form-control border-dark' type='date' value={end_date} name='end_date' onChange={(e) => setEnd_Date(e.target.value)}></input>
@@ -118,7 +118,7 @@ console.log(params.id)
                         {taken ? <div><label className='form-label'>Trip Images:</label>
                             <input className='form-control border-dark' name='attachments' type='file' accept='image/*' multiple={true} onChange={onImageUpload}></input>
                             </div> : null}
-                        <button type='submit'>Submit</button>
+                        <button className='btn btn-dark' type='submit'>Submit</button>
                     </form>
 
                 </div>
@@ -133,7 +133,7 @@ console.log(params.id)
                 <div className='row'>
                     <form className='col-6' onSubmit={submitForm}>
                         <label className='form-label'>Place:</label>
-                        <select name='place' className='form-control border-dark' onChange={handlePlaceChange}>
+                        <select required name='place' className='form-control border-dark' onChange={handlePlaceChange}>
                             <option value="Select a Place"> -- Select a Place -- </option>
                             {places.map((place) => <option value={place.id}>{place.name}</option>)}
                         </select>
@@ -150,7 +150,7 @@ console.log(params.id)
                         <br></br>
                         {taken ? <div><label className='form-label'>Trip Images:</label>
                             <input className='form-control border-dark' name='attachments' type='file' accept='image/*' multiple={true} onChange={onImageUpload}></input></div> : null}
-                        <button type='submit'>Submit</button>
+                        <button className='btn btn-dark'>Submit</button>
                     </form>
 
                 </div>

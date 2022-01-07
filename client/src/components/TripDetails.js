@@ -1,5 +1,5 @@
-import React, {useEffect, useState, useRef} from 'react'
-import {useParams, useNavigate} from "react-router-dom"
+import React, { useEffect, useState, useRef } from 'react'
+import { useParams, useNavigate } from "react-router-dom"
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
@@ -17,61 +17,87 @@ export default function TripDetails() {
 
 
 
-    useEffect(()=>{
+    useEffect(() => {
         fetch(`/trips/${params.id}`)
-        .then((resp)=>{
-            if(resp.ok){
-                resp.json().then((data)=> {
-                    console.log(data)
-                    setTripDetails(data)
-                fetch(`/places/${data.place_id}`)
-            .then(r=>r.json())
-        .then(data=>setPlace(data))})
+            .then((resp) => {
+                if (resp.ok) {
+                    resp.json().then((data) => {
+                        console.log(data)
+                        setTripDetails(data)
+                        fetch(`/places/${data.place_id}`)
+                            .then(r => r.json())
+                            .then(data => setPlace(data))
+                    })
 
-            } else{
-                resp.json().then(data=>console.log(data))
-            }
-        })
-        
-    
+                } else {
+                    resp.json().then(data => console.log(data))
+                }
+            })
+
+
     }, []);
     function handleDeleteClick() {
         const del = window.confirm("Delete Trip? All images will also be deleted!");
-  
-      if(del === true){
-          fetch(`/trips/${params.id}`, {
-        method: "DELETE",
-      })
-      .then(r=>r.json())
-      .then(data=> console.log(data))
-      .catch(data =>console.log(data.errors))
-      navigate('/trips/collection')
-      
-      }
-      else{console.log("Delete canceled")}}
-        
 
-  
+        if (del === true) {
+            fetch(`/trips/${params.id}`, {
+                method: "DELETE",
+            })
+                .then(r => r.json())
+                .then(data => console.log(data))
+                .catch(data => console.log(data.errors))
+            navigate('/trips/collection')
 
-    function handleMap(){
-        setShowMap(showMap=>!showMap)}
-     
-if(!tripDetails) return (null);
+        }
+        else { console.log("Delete canceled") }
+    }
 
-return (
+
+
+
+    function handleMap() {
+        setShowMap(showMap => !showMap)
+    }
+
+    if (!tripDetails) return (null);
+
+    return (
+        // <div>
+        //     {showMap?<TripMap tripDetails={tripDetails} place={place}/>: null}
+        //     <div>
+        //         <h2>Title:{tripDetails.name}</h2>
+        //         <h4>Start Date: {tripDetails.start_date} End Date: {tripDetails.end_date}</h4>
+        //         <h6>Status: {tripDetails.taken? 'Taken' : 'Planned'}</h6>
+        //         {place.visited? <em> Location Status: You've been here before!</em>:<em>Location Status: A new place awaits!</em>}
+        //         <p>{tripDetails.description}</p>
+        //         {tripDetails.taken? tripDetails.attachment_urls.map((image)=><img src={image} width={200} height={250}></img>): 'Trip Planned, No Pictures Yet'}
+        //         <button onClick={handleMap}>{showMap? 'Hide Map' : 'Show Map'}</button>
+        //         <button onClick={(e)=>handleDeleteClick(tripDetails)}>Delete Trip</button>
+        //         <button onClick={()=>navigate(`/trips/${tripDetails.id}/edit`)}>Edit Trip Info</button>
+        //     </div>
+        // </div>
+
         <div>
-            {showMap?<TripMap tripDetails={tripDetails} place={place}/>: null}
-            <div>
-                <h2>Title:{tripDetails.name}</h2>
-                <h4>Start Date: {tripDetails.start_date} End Date: {tripDetails.end_date}</h4>
-                <h6>Status: {tripDetails.taken? 'Taken' : 'Planned'}</h6>
-                {place.visited? <em> Location Status: You've been here before!</em>:<em>Location Status: A new place awaits!</em>}
-                <p>{tripDetails.description}</p>
-                {tripDetails.taken? tripDetails.attachment_urls.map((image)=><img src={image} width={200} height={250}></img>): 'Trip Planned, No Pictures Yet'}
-                <button onClick={handleMap}>{showMap? 'Hide Map' : 'Show Map'}</button>
-                <button onClick={(e)=>handleDeleteClick(tripDetails)}>Delete Trip</button>
-                <button onClick={()=>navigate(`/trips/${tripDetails.id}/edit`)}>Edit Trip Info</button>
+            {showMap ? <TripMap tripDetails={tripDetails} place={place} /> : null}
+            <div className="card">
+                <div className="card-header">
+                    <h3>{tripDetails.name}</h3>
+                </div>
+                <div className="card-body">
+                    <h6 className="card-title">Start Date: {tripDetails.start_date} End Date: {tripDetails.end_date}</h6>
+                    <em className="card-text">Status: {tripDetails.taken ? 'Taken' : 'Planned'}</em>
+                    <p classNameName="card-text"> Description: {tripDetails.description}</p>
+                    <button className='btn btn-dark m-2' onClick={handleMap}>{showMap ? 'Hide Map' : 'Show Map'}</button>
+                    <button className='btn btn-dark m-2' onClick={(e) => handleDeleteClick(tripDetails)}>Delete Trip</button>
+                    <button className='btn btn-dark m-2' onClick={() => navigate(`/trips/${tripDetails.id}/edit`)}>Edit Trip Info</button>
+                </div>
+                <div class="card-footer text-muted">
+                {tripDetails.taken? tripDetails.attachment_urls.map((image)=><img className='m-3' src={image} width={250} height={250}></img>): 'Trip Planned, No Pictures Yet'}
+                </div>
             </div>
+
+
         </div>
-    )}
+    )
+}
 

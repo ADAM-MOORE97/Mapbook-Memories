@@ -5,10 +5,13 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 const styles = {
-    width: "100vw",
+    width: "90vw",
     height: "50vh",
-
-};
+    margin: '10em',
+    padding: '5em',
+    border: "5px solid"
+  
+  };
 
 const ReactMap = () => {
     const [map, setMap] = useState(null);
@@ -47,72 +50,29 @@ useEffect(()=>{
                 setMap(map);
                 map.resize();
             });
-            map.on('click', (e) => {
-                setCoords({ lng: e.lngLat.lng.toFixed(6), lat: e.lngLat.lat.toFixed(6) })
-
-
-            })
-            // map.on('move', () => {
-            //     setLng(map.getCenter().lng.toFixed(6));
-            //     setLat(map.getCenter().lat.toFixed(6));
-            //     setZoom(map.getZoom().toFixed(3));
-            // });
-            // map.on('contextmenu', (e) => {
-
-            //     const marker = new mapboxgl.Marker({ color: 'black', draggable: true, offset: [0, -50 / 2] })
-            //         .setLngLat([e.lngLat.lng.toFixed(6), e.lngLat.lat.toFixed(6)])
-            //         .addTo(map)
-            //     marker.id = Math.abs(e.lngLat.lng)
-            //     let markerz = { id: marker.id, lng: marker.getLngLat().lng, lat: marker.getLngLat().lat }
-            //     setMarkers(markers.push(markerz))
-            //     console.log(markers)
-            //     marker.on('dragend', (e) => {
-            //         let lngLat = e.target.getLngLat();
-            //         setCoords({ lng: lngLat['lat'], lat: lngLat['lng'] })
-            //         console.log(coords)
-
-            //     })
-
-
-
-            // });
+        
+            map.on('move', () => {
+                setLng(map.getCenter().lng.toFixed(6));
+                setLat(map.getCenter().lat.toFixed(6));
+                setZoom(map.getZoom().toFixed(3));
+            });
+      
 
         };
 
         if (!map) initializeMap({ setMap, mapContainer });
     }, [map]);
 
-    function handleMarker(e) {
-        e.preventDefault();
-        let marker = new mapboxgl.Marker({ color: 'black', draggable: true, })
-            .setLngLat([coords.lng, coords.lat])
-            .addTo(map)
-        marker.id = Math.abs(marker.getLngLat().lng)
-        let markerObj = { id: marker.id, lng: marker.getLngLat().lng, lat: marker.getLngLat().lat }
-        setMarkers(markerObj)
-        console.log(markers)
 
-    }
-function Change(e){
- 
-setCoords({[e.target.name]:e.target.value})
 
-}
     return (
         <div>
+            <div className="sidebar text center">
+                Center Of Map: Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+            </div>
             <div ref={el => (mapContainer.current = el)} style={styles} />
-            {/* <div className="sidebar">
-                Center = Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-            </div> */}
-            <h2>New Place</h2>
-            <form>
-                <input name='placeName' placeholder="Location Name"/>
-                <input name="lng" defaultValue={coords.lng} placeholder="Click Map for Longitude" />
-                <input type='file'/>
-                <input name='lat' defaultValue={coords.lat} placeholder="Click Map for Latitude" />
-                <textarea name='description' placeholder="Description"/>
-                <button>add place</button>
-            </form>
+            
+        
 
         </div>
     );

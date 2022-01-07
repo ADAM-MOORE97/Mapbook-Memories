@@ -7,14 +7,14 @@ export default function PlacesDash({placeData}) {
     let dreamedCount = placeData? placeData.filter(place => place.visited === false).length : null
     return (
 
-        <div>
-            <h6>Places Visited:{visitedCount} </h6>
-            <h6>Dream Places:{dreamedCount} </h6>
+        <div className='col-6 mt-5 border'>
+            <h6 className='text'>Places Visited:{visitedCount} </h6>
+            <h6 className='text'>Dream Places:{dreamedCount} </h6>
             <Link to="/places/collection">
-                <button>See All</button>
+                <button className='btn btn-dark m-2'>See All</button>
             </Link>
             <Link to="/places/new">
-                <button>Add</button>
+                <button className='btn btn-dark m-2'>Add</button>
             </Link>
 
 

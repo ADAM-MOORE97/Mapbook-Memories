@@ -98,9 +98,9 @@ export default function PlaceForm() {
     return (
         <div>
          {params.id? <EditPlaceMap setPlaceData={setPlaceData} placeData={placeData}/> : <NewPlaceMap setPlaceData={setPlaceData} placeData={placeData}/>}
-            <div className='container-fluid mt-5'>
+            <div className='container-fluid mt-5 '>
                 <div className='row'>
-                    <form className='col-6' onSubmit={handleSubmit}>
+                    <form className='' onSubmit={handleSubmit}>
                         <label className='form-label'>Location Name:</label>
                         <input className='form-control border-dark' type='text' name='name' value={placeData.name} onChange={handleChangeName} required></input>
                         <label className='form-label'>Latitude:</label>
@@ -111,11 +111,11 @@ export default function PlaceForm() {
                         <label className='form-label'>Visited: </label>
                         <input type='checkbox' name='visited' value={placeData.visited} onChange={handleChangeVisited}></input>
                         <br />
-                        <label className='form-label'>description:</label>
+                        <label className='form-label'>Description:</label>
                         <textarea id='placeDescription' className='form-control border-dark' name='description' value={placeData.description} onChange={handleChangeDesc}></textarea>
                         <button id='form-submit-button' className='btn btn-dark mt-5'>Submit</button>
                     </form>
-                    <div id='placePreviewColumn' className='col-6'>
+                    {/* <div id='placePreviewColumn' className='col-6'>
                         <label id='preview'>Preview:</label>
                         <div id='placePreview' className='card border-dark'>
 
@@ -125,7 +125,7 @@ export default function PlaceForm() {
 
                             <p>{placeData.description}</p>
                         </div>
-                    </div>
+                    </div> */}
 
                 </div>
             </div>

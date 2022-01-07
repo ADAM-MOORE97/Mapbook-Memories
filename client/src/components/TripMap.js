@@ -5,11 +5,13 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 const showstyles = {
-    width: "100vw",
+    width: "90vw",
     height: "50vh",
-     display: 'block'
-
-}
+    margin: '10em',
+    padding: '5em',
+    border: "5px solid"
+  
+  };
 
 export default function TripMap({place}) {
     

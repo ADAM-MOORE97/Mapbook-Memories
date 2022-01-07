@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { UserContext } from '../context/user';
 import PlacesDash from './PlacesDash';
+import ReactMap from './ReactMap';
 import TripDash from './TripDash';
 
 export default function Dashboard({setPlaces, setTrips}) {
@@ -37,11 +38,11 @@ export default function Dashboard({setPlaces, setTrips}) {
 
 
     return (
-        <div>
+        <div className='row'>
            
 <PlacesDash placeData={placeData}/>
 <TripDash tripData={tripData}/>
-
+<ReactMap/>
 
 
         </div>

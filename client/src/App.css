@@ -58,3 +58,30 @@ background: black
   -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, .7);
   box-shadow: 0 10px 20px rgba(0, 0, 0, .7);
 }
+.form-horizontal{
+  display:block;
+  width:50%;
+  margin:0 auto;
+}
+
+.text {
+  font-family: 'Rock Salt', cursive;
+  font-family: 'Teko', sans-serif;
+  font-size: 35px;
+}
+.text-light {
+  font-family: 'Rock Salt', cursive;
+  font-family: 'Teko', sans-serif;
+  font-size: 35px;
+  color: white !important
+}
+
+.center {
+  text-align: center;
+}
+
+body{
+
+  font-size: 20px !important;
+  font-family: 'Teko', sans-serif  !important
+}

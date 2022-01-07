@@ -4,12 +4,14 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
-
 const styles = {
-    width: "100vw",
+    width: "90vw",
     height: "50vh",
-
-};
+    margin: '10em',
+    padding: '5em',
+    border: "5px solid"
+  
+  };
 
 export default function PlaceDetailMap({placeDetails}) {
     

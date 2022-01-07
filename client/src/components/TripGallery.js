@@ -21,7 +21,7 @@ export default function TripGallery() {
             {filterTrip.map((tripInfo)=>{
                 let info = tripInfo
                 let images = tripInfo.attachment_urls
-                    return <ImageCards carousel={carousel} images={images} info={info} />
+                   return <ImageCards carousel={carousel} images={images} info={info} />
                 })}
             
         </div>

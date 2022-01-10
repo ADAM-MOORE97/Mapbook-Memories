@@ -55,3 +55,5 @@ gem "active_model_serializers", "~> 0.10.12"
 gem 'pry'
 gem 'activerecord-reset-pk-sequence'
 gem "jsonapi-serializer", "~> 2.2"
+gem "aws-sdk-s3", require: false
+gem 'mini_magick'

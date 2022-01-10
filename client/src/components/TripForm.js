@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
+
 export default function TripForm({ user }) {
 
     const params = useParams();
@@ -13,6 +14,7 @@ export default function TripForm({ user }) {
     const [taken, setTaken] = useState('')
     const [attachment, setAttachment] = useState({ attachments: [] })
     const [places, setPlaces] = useState([])
+    
 
 
     useEffect(() => {
@@ -83,7 +85,7 @@ export default function TripForm({ user }) {
     }
 
     const onImageUpload = (e) => {
-
+console.log(e.target.files)
         setAttachment({
             attachments: [...e.target.files]
         })

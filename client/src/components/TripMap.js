@@ -22,7 +22,7 @@ export default function TripMap({place}) {
   
 
 
-        mapboxgl.accessToken = 'pk.eyJ1IjoiYWRhbW1vb3JlMjEiLCJhIjoiY2t4NTY4MmxkMjE3MTJ1bXI0c2hkcWF4MCJ9.4mGlkslBlwc6tAmqbmUuoA';;
+        mapboxgl.accessToken = process.env.REACT_APP_MAP_API;;
          const initializeMap = ({ setMap, mapContainer }) => {
              const map = new mapboxgl.Map({
                  container: mapContainer.current,

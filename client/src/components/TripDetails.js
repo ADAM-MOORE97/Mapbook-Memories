@@ -60,7 +60,7 @@ export default function TripDetails() {
     }
 
     if (!tripDetails) return (null);
-
+    console.log(tripDetails)
     return (
         // <div>
         //     {showMap?<TripMap tripDetails={tripDetails} place={place}/>: null}
@@ -92,7 +92,7 @@ export default function TripDetails() {
                     <button className='btn btn-dark m-2' onClick={() => navigate(`/trips/${tripDetails.id}/edit`)}>Edit Trip Info</button>
                 </div>
                 <div class="card-footer text-muted">
-                {tripDetails.taken? tripDetails.attachment_urls.map((image)=><img className='m-3' src={image} width={250} height={250}></img>): 'Trip Planned, No Pictures Yet'}
+                {/* {tripDetails.taken? tripDetails.attachment_urls.map((image)=><img className='m-3' src={image} width={250} height={250}></img>): 'Trip Planned, No Pictures Yet'} */}
                 </div>
             </div>
 

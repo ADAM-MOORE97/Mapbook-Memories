@@ -7,7 +7,7 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 const styles = {
     width: "90vw",
     height: "50vh",
-    margin: '10em',
+    // margin: '10em',
     padding: '5em',
     border: "5px solid"
   
@@ -29,7 +29,7 @@ useEffect(()=>{
 }, [])
 
     useEffect(() => {
-        mapboxgl.accessToken = 'pk.eyJ1IjoiYWRhbW1vb3JlMjEiLCJhIjoiY2t4NTY4MmxkMjE3MTJ1bXI0c2hkcWF4MCJ9.4mGlkslBlwc6tAmqbmUuoA';;
+        mapboxgl.accessToken = process.env.REACT_APP_MAP_API;
         const initializeMap = ({ setMap, mapContainer }) => {
             const map = new mapboxgl.Map({
                 container: mapContainer.current,
@@ -66,8 +66,8 @@ useEffect(()=>{
 
 
     return (
-        <div>
-            <div className="sidebar text center">
+        <div className="row">
+            <div className="sidebar text center col-xs-5">
                 Center Of Map: Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
             </div>
             <div ref={el => (mapContainer.current = el)} style={styles} />

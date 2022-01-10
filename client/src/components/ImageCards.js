@@ -3,7 +3,7 @@ import '../App.css'
 
 
 export default function ImageCards({ images, info, }) {
-
+console.log(images)
 
     const [place, setPlace] = useState({})
     const [index, setIndex] = useState(0); // create state to keep track of images index, set the default index to 0
@@ -37,9 +37,9 @@ export default function ImageCards({ images, info, }) {
                 <div className='m-3'>
 
                 
-                {images.map(image=><div className='polaroid'><a title={place.name}><img  src={image} alt={index} width={250} /></a></div>)}
+                {images.map(image=><div className='polaroid'><a title={place.name}><img  src={image} alt={index} /></a></div>)}
                            
-                       
+                      
                 
 
 

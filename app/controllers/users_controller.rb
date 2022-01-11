@@ -27,10 +27,10 @@ class UsersController < ApplicationController
     session[:user_id] = user.id
     render json: user, status: :created
     end
-    def destroy
-        user = User.find(params[:id])
-        user.destroy
-        head :no_content
+    # def destroy
+    #     user = User.find(params[:id])
+    #     user.destroy
+    #     head :no_content
 
-    end
+    # end
 end

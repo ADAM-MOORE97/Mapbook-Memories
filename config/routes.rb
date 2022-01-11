@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   
-  resources :pictures
+
   resources :trips
   resources :places
-  resources :users
+  resources :users, only: [:show, :create]
   get '/me', to: 'users#show'
   post '/auth_users', to: 'users#create'
   delete '/logout', to: 'sessions#destroy'

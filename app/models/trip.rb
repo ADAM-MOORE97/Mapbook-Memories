@@ -3,6 +3,7 @@ class Trip < ApplicationRecord
     belongs_to :user 
     belongs_to :place
     has_many_attached :attachments
+    validates :name, uniqueness: true
 
     def attachment_urls
         

@@ -47,7 +47,8 @@ background: black
 }
 .polaroid img {
   display: block;
-  /* width: 300px; */
+  width: 300px;
+  height: 300px
 }
 .polaroid a:hover {
   -webkit-transform: scale(1.2);

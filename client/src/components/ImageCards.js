@@ -37,7 +37,7 @@ console.log(images)
                 <div className='m-3'>
 
                 
-                {images.map(image=><div className='polaroid'><a title={place.name}><img  src={image} alt={index} /></a></div>)}
+                {images.map(image=><div className='polaroid center'><a title={place.name}><img  src={image} alt={index} /></a></div>)}
                            
                       
                 
